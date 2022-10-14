@@ -34,8 +34,8 @@ public class Anubita extends Guerreiro {
         atacando.add(this);
         atacando.remove(i);
 
-        recuperaHidra(atacando, i);
-        recuperaHidra(atacado, i);
+//        recuperaHidra(atacando, i);
+//        recuperaHidra(atacado, i);
         adicionarNoFinal(atacando, atacado, i, ordem);
     }
 

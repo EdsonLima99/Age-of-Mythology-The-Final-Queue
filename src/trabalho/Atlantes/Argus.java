@@ -26,8 +26,8 @@ public class Argus extends Guerreiro {
         if (atacado.get(i).getEnergia() <= 0) {
             morre(atacando, atacado, i, 0);
         }
-        recuperaHidra(atacando, i);
-        recuperaHidra(atacado, i);
+//        recuperaHidra(atacando, i);
+//        recuperaHidra(atacado, i);
         adicionarNoFinal(atacando, atacado, i, ordem);
     }
 

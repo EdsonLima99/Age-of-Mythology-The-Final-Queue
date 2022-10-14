@@ -28,8 +28,8 @@ public class Mumia extends Guerreiro {
             morre(atacando, atacado, i, 0);
         }
 
-        recuperaHidra(atacando, i);
-        recuperaHidra(atacado, i);
+//        recuperaHidra(atacando, i);
+//        recuperaHidra(atacado, i);
         adicionarNoFinal(atacando, atacado, i, ordem);
     }
 

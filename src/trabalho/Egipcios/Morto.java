@@ -25,8 +25,8 @@ public class Morto extends Mumia {
             morre(atacando, atacado, i, 0);
         }
 
-        recuperaHidra(atacando, i);
-        recuperaHidra(atacado, i);
+//        recuperaHidra(atacando, i);
+//        recuperaHidra(atacado, i);
         adicionarNoFinal(atacando, atacado, i, ordem);
     }
     

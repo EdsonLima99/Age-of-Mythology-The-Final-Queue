@@ -13,11 +13,25 @@ import trabalho.Guerreiro;
  */
 public class Hidra extends Guerreiro {
 
-//    private static int qtdCabecas = 0;
+    private static int qtdCabecas = 1;
     private static int ataque = 50;
 
     public Hidra(String nome, int idade, double peso) {
         super(nome, idade, peso);
+    }
+
+    public static void recuperaHidra(ArrayList<Guerreiro> guerreiro, int i) {
+        int cont;
+
+        for (cont = 1; cont < guerreiro.size(); cont++) {
+            if (guerreiro.get(cont).getClass().getSimpleName().equals("Hidra")) {
+                guerreiro.get(cont).setEnergia(guerreiro.get(cont).getEnergia() + 10);
+            }
+            if (guerreiro.get(cont).getEnergia() > 100 && guerreiro.get(cont).getClass().getSimpleName().equals("Hidra")) {
+                guerreiro.get(cont).setEnergia(100);
+            }
+
+        }
     }
 
     @Override
@@ -29,14 +43,15 @@ public class Hidra extends Guerreiro {
 
             if (atacado.get(i).getEnergia() <= 0) {
                 morre(atacando, atacado, i, energiaPrometeano);
-//            qtdCabecas += 1;
-                ataque += 10;
+                recuperaHidra(atacando, i);
+                ataque += 10 * qtdCabecas;
+                qtdCabecas++;
             }
             //        ataquemorre(atacado, i, ataque);
         }
-        
-        recuperaHidra(atacando, i);
-        recuperaHidra(atacado, i);
+
+//        recuperaHidra(atacando, i);
+//        recuperaHidra(atacado, i);
         adicionarNoFinal(atacando, atacado, i, ordem);
     }
 

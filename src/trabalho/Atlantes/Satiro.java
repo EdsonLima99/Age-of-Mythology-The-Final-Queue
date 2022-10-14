@@ -28,8 +28,8 @@ public class Satiro extends Guerreiro {
             }
         }
 
-        recuperaHidra(atacando, i);
-        recuperaHidra(atacado, i);
+//        recuperaHidra(atacando, i);
+//        recuperaHidra(atacado, i);
         adicionarNoFinal(atacando, atacado, i, ordem);
     }
 

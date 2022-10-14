@@ -88,20 +88,6 @@ public abstract class Guerreiro {
         }
     }
 
-    public static void recuperaHidra(ArrayList<Guerreiro> guerreiro, int i) {
-        int cont;
-
-        for (cont = 1; cont < guerreiro.size(); cont++) {
-            if (guerreiro.get(cont).getClass().getSimpleName().equals("Hidra")) {
-                guerreiro.get(cont).setEnergia(guerreiro.get(cont).getEnergia() + 10);
-            }
-            if (guerreiro.get(cont).getEnergia() > 100 && guerreiro.get(cont).getClass().getSimpleName().equals("Hidra")) {
-                guerreiro.get(cont).setEnergia(100);
-            }
-
-        }
-    }
-
     public static void adicionarNoFinal(ArrayList<Guerreiro> atacando, ArrayList<Guerreiro> atacado, int i, int ordem) {
         if (ordem == 2) {
             atacando.add(atacando.get(i));

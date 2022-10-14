@@ -37,8 +37,8 @@ public class Valquiria extends Guerreiro {
             }
         }
         
-        recuperaHidra(atacando, i);
-        recuperaHidra(atacado, i);
+//        recuperaHidra(atacando, i);
+//        recuperaHidra(atacado, i);
         recuperarEnergia(atacando, i);
         adicionarNoFinal(atacando, atacado, i, ordem);
     }

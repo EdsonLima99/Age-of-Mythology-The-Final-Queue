@@ -39,8 +39,8 @@ public class LoboDeFenris extends Guerreiro {
             //        morre(atacado, i);
         }
         
-        recuperaHidra(atacando, i);
-        recuperaHidra(atacado, i);
+//        recuperaHidra(atacando, i);
+//        recuperaHidra(atacado, i);
         adicionarNoFinal(atacando, atacado, i, ordem);
     }
 
