@@ -26,73 +26,6 @@ import trabalho.Nordicos.Valquiria;
  */
 public class Trabalho {
 
-    public static void condicional(Guerreiro guerreiro, ArrayList<Guerreiro> perdedor, Scanner arquivo) {
-        if (perdedor.get(0).getNome().equals(arquivo.next())) {
-            guerreiro.setNome(perdedor.get(0).getNome());
-            guerreiro.setIdade(arquivo.nextInt());
-            guerreiro.setPeso(arquivo.nextDouble());
-        }
-    }
-    
-    public static Guerreiro definirLado(Guerreiro guerreiro, ArrayList<Guerreiro> lado, int identificador) throws FileNotFoundException{
-        if (identificador == 1) {
-            Scanner arquivo = new Scanner(new FileReader("lado1.txt"));
-            while (arquivo.hasNextLine()) {
-                switch (arquivo.nextInt()) {
-                    case 1:
-                        condicional(guerreiro, lado, arquivo);
-                        break;
-                    case 2:
-                        condicional(guerreiro, lado, arquivo);
-                        break;
-                    case 3:
-                        condicional(guerreiro, lado, arquivo);
-                        break;
-                    case 4:
-                        condicional(guerreiro, lado, arquivo);
-                        break;
-                    default:
-                        condicional(guerreiro, lado, arquivo);
-                        break;
-                }
-            }
-        } else {
-            Scanner arquivo = new Scanner(new FileReader("lado2.txt"));
-            while (arquivo.hasNextLine()) {
-                switch (arquivo.nextInt()) {
-                    case 1:
-                        condicional(guerreiro, lado, arquivo);
-                        break;
-                    case 2:
-                        condicional(guerreiro, lado, arquivo);
-                        break;
-                    case 3:
-                        condicional(guerreiro, lado, arquivo);
-                        break;
-                    case 4:
-                        condicional(guerreiro, lado, arquivo);
-                        break;
-                    default:
-                        condicional(guerreiro, lado, arquivo);
-                        break;
-                }
-            }
-        }
-        
-        return guerreiro;
-    }
-    public static Guerreiro ladoPerderdor(ArrayList<Guerreiro> perdedor, int identificador) throws FileNotFoundException {
-        Guerreiro guerreiro = perdedor.get(0);
-        guerreiro = definirLado(guerreiro, perdedor, identificador);
-        return guerreiro;
-    }
-
-    public static Guerreiro ladoVencedor(ArrayList<Guerreiro> ganhador, int identificador) throws FileNotFoundException {
-        Guerreiro guerreiro = ganhador.get(0);
-        guerreiro = definirLado(guerreiro, ganhador, identificador);
-        return guerreiro;
-    }
-
     public static int somarEnergia(ArrayList<Guerreiro> guerreiro) {
         int energia = 0, i;
 
@@ -112,26 +45,35 @@ public class Trabalho {
         while (somaEnergia1 > 0 && somaEnergia2 > 0) {
             boolean ordem = aleatorio.nextBoolean();
 
-            if (somaEnergia1 > 0) {
-                perdedor = ladoPerderdor(lado2, 2);
-                vencedor = ladoVencedor(lado1, 1);
+            if (somaEnergia1 > 0 && somaEnergia1 > somaEnergia2) {
+                perdedor = lado2.get(0);
+                vencedor = lado1.get(0);
             } else {
-                perdedor = ladoPerderdor(lado1, 1);
-                vencedor = ladoVencedor(lado2, 2);
+                perdedor = lado1.get(0);
+                vencedor = lado2.get(0);
             }
 
             if (ordem == true) {
-                lado1.get(0).atacar(lado1, lado2, 0, 1);
-                lado2.get(0).atacar(lado2, lado1, 0, 2);
+                if (!lado2.isEmpty()) {
+                    lado1.get(0).atacar(lado1, lado2, 0, 1);
+                }
+                if (!lado2.isEmpty() && !lado1.get(lado1.size() - 1).getClass().getSimpleName().equals("Ciclope")) {
+                    lado2.get(0).atacar(lado2, lado1, 0, 2);
+                }
             } else {
-                lado2.get(0).atacar(lado2, lado1, 0, 1);
-                lado1.get(0).atacar(lado1, lado2, 0, 2);
+                if (!lado1.isEmpty()) {
+                    lado2.get(0).atacar(lado2, lado1, 0, 1);
+                }
+                if (!lado1.isEmpty()) {
+                    lado1.get(0).atacar(lado1, lado2, 0, 2);
+                }
+
             }
 
             somaEnergia1 = somarEnergia(lado1);
             somaEnergia2 = somarEnergia(lado2);
         }
-        
+
         if (somaEnergia1 > 0) {
             System.out.println("Gregos e Nórdicos venceram.");
             System.out.println(perdedor.getNome() + "\t" + perdedor.getIdade() + "\t" + (int) perdedor.getPeso());
@@ -237,12 +179,13 @@ public class Trabalho {
         // TODO code application logic here
         ArrayList<Guerreiro> lado1 = new ArrayList<>();
         ArrayList<Guerreiro> lado2 = new ArrayList<>();
-        lerArquivo(lado1, 1);
-        lerArquivo(lado2, 2);
 
-        pesoDosLados(lado1, lado2);
-        maiorIdade(lado1, lado2);
-        guerra(lado1, lado2);
+        lerArquivo(lado1, 1);//Ler arquivo lado1.txt
+        lerArquivo(lado2, 2);//Ler arquivo lado2.txt
+
+        pesoDosLados(lado1, lado2);//Cálcula soma dos pesos de cada lado e imprimir
+        maiorIdade(lado1, lado2);//Definir qual o guerreiro com a maior idade
+        guerra(lado1, lado2);//Guerra entre os lados
     }
 
 }

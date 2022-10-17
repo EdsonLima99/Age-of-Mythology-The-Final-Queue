@@ -5,6 +5,7 @@
 package trabalho;
 
 import java.util.ArrayList;
+import trabalho.Atlantes.Prometeano;
 import trabalho.Egipcios.Anubita;
 
 /**
@@ -58,42 +59,42 @@ public abstract class Guerreiro {
     }
 
     public abstract void atacar(ArrayList<Guerreiro> atacando, ArrayList<Guerreiro> guerreiro, int i, int ordem);
-
+    
     public static void morre(ArrayList<Guerreiro> atacando, ArrayList<Guerreiro> atacado, int i, int energiaPrometeano) {
-        if (atacado.get(i).getEnergia() <= 0) {
-            switch (atacado.get(i).getClass().getSimpleName()) {
-                case "Mumia":
-                    Anubita a1 = new Anubita(atacando.get(i).getNome(), 0, 60);
-                    Anubita a2 = new Anubita(atacando.get(i).getNome(), 0, 60);
-                    Anubita a3 = new Anubita(atacando.get(i).getNome(), 0, 60);
-
-                    atacando.add(a1);
-                    atacando.add(a2);
-                    atacando.add(a3);
+        if (atacado.get(i).getEnergia() <= 0) {//Se a energia do atacado for menor que 0
+            switch (atacado.get(i).getClass().getSimpleName()) {//Switch com o nome da Classe
+                case "Mumia"://caso Múmia
+                    atacado.add(new Anubita(atacando.get(i).getNome(), 0, 60));//adiciona no atacado um novo Anubita
+                    atacado.add(new Anubita(atacando.get(i).getNome(), 0, 60));//adiciona no atacado um novo Anubita
+                    atacado.add(new Anubita(atacando.get(i).getNome(), 0, 60));//adiciona no atacado um novo Anubita
+                    atacado.add(new Anubita(atacando.get(i).getNome(), 0, 60));//adiciona no atacado um novo Anubita
+                    atacado.remove(i);
                     break;
-                case "Prometeano":
+                case "Prometeano"://caso Prometeano
                     if (energiaPrometeano > 1) {
-                        atacado.get(i).setEnergia((int) (energiaPrometeano * 0.5));
-                        atacado.add(atacado.get(i));
-                        atacado.add(atacado.get(i));
+                        atacado.add(new Prometeano(atacado.get(i), (int) (energiaPrometeano * 0.5)));//adiciona no atacado um novo Prometeano
+                        atacado.add(new Prometeano(atacado.get(i), (int) (energiaPrometeano * 0.5)));//adiciona no atacado um novo Prometeano
                         atacado.remove(i);
                     } else {
                         atacado.remove(i);
-                    }
+                    }//if
                     break;
                 default:
                     atacado.remove(i);
                     break;
-            }
-        }
+            }//switch
+        }//if
+    }//morre
+
+    public static void adicionarNoFinal(ArrayList<Guerreiro> guerreiro, int i) {
+        guerreiro.add(guerreiro.get(i));
+        guerreiro.remove(i);
     }
 
-    public static void adicionarNoFinal(ArrayList<Guerreiro> atacando, ArrayList<Guerreiro> atacado, int i, int ordem) {
+    public static void adicionarNoFinal(ArrayList<Guerreiro> guerreiro, int i, int ordem) {
         if (ordem == 2) {
-            atacando.add(atacando.get(i));
-            atacando.remove(i);
-            atacado.add(atacado.get(i));
-            atacado.remove(i);
+            guerreiro.add(guerreiro.get(i));
+            guerreiro.remove(i);
         }
     }
 

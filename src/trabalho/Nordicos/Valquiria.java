@@ -18,29 +18,28 @@ public class Valquiria extends Guerreiro {
     }
 
     public static void recuperarEnergia(ArrayList<Guerreiro> atacando, int i) {
-        atacando.get(i).setEnergia(atacando.get(i).getEnergia() + 10);
+        if (atacando.size() > 1) {
+            atacando.get(i + 1).setEnergia(atacando.get(i + 1).getEnergia() + 20);
 
-        if (atacando.get(i).getEnergia() > 100 && !(atacando.get(i).getClass().getSuperclass().getSimpleName().equals("Nordicos"))) {
-            atacando.get(i).setEnergia(100);
+            if (atacando.get(i + 1).getEnergia() > 100 && !(atacando.get(i + 1).getClass().getSuperclass().getSimpleName().equals("Nordicos"))) {
+                atacando.get(i + 1).setEnergia(100);
+            }
         }
     }
 
     @Override
     public void atacar(ArrayList<Guerreiro> atacando, ArrayList<Guerreiro> atacado, int i, int ordem) {
-        if (!atacado.isEmpty()) {
-            int energiaPrometeano = verificaPrometeano(atacado, i);
+        int energiaPrometeano = verificaPrometeano(atacado, i);
 
-            atacado.get(i).setEnergia(atacado.get(i).getEnergia() - 20);
+        atacado.get(i).setEnergia(atacado.get(i).getEnergia() - 20);
 
-            if (atacado.get(i).getEnergia() <= 0) {
-                morre(atacando, atacado, i, energiaPrometeano);
-            }
+        if (atacado.get(i).getEnergia() <= 0) {
+            morre(atacando, atacado, i, energiaPrometeano);
         }
-        
-//        recuperaHidra(atacando, i);
-//        recuperaHidra(atacado, i);
         recuperarEnergia(atacando, i);
-        adicionarNoFinal(atacando, atacado, i, ordem);
+        adicionarNoFinal(atacando, i, ordem);
+        if (!atacado.isEmpty()) {
+            adicionarNoFinal(atacado, i, ordem);
+        }
     }
-
 }

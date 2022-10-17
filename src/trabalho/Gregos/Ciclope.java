@@ -19,23 +19,22 @@ public class Ciclope extends Guerreiro {
 
     @Override
     public void atacar(ArrayList<Guerreiro> atacando, ArrayList<Guerreiro> atacado, int i, int ordem) {
-        if (!atacado.isEmpty()) {
-            int energiaPrometeano = verificaPrometeano(atacado, i);
+        int energiaPrometeano = verificaPrometeano(atacado, i);
 
-            if (ordem == 1) {
-                atacado.get(i).setEnergia(atacado.get(i).getEnergia() - 40);
-            }
+        if (ordem == 1) {
+            atacado.get(i).setEnergia(atacado.get(i).getEnergia() - 40);
+
             if (atacado.get(i).getEnergia() <= 0) {
                 morre(atacando, atacado, i, energiaPrometeano);
+                adicionarNoFinal(atacando, i, 2);
+                return;
             }
-            
-            atacado.add(atacado.get(i));
-            atacado.remove(i);
         }
-        
-//        recuperaHidra(atacando, i);
-//        recuperaHidra(atacado, i);
-        adicionarNoFinal(atacando, atacado, i, ordem);
+
+        adicionarNoFinal(atacando, i, 2);
+        if (!atacado.isEmpty()) {
+            adicionarNoFinal(atacado, i, 2);
+        }
     }
 
 }

@@ -20,17 +20,16 @@ public class Mumia extends Guerreiro {
     @Override
     public void atacar(ArrayList<Guerreiro> atacando, ArrayList<Guerreiro> atacado, int i, int ordem) {
         atacado.get(i).setEnergia(atacado.get(i).getEnergia() - 50);
-        
+
         if (atacado.get(i).getEnergia() <= 0) {
-            Morto morto = new Morto(atacado.get(i).getNome(), atacado.get(i).getIdade(), 100);
-            atacando.add(morto);
-            
+            atacando.add(new Morto(atacado.get(i).getNome(), atacado.get(i).getIdade(), atacado.get(i).getPeso()));
             morre(atacando, atacado, i, 0);
         }
 
-//        recuperaHidra(atacando, i);
-//        recuperaHidra(atacado, i);
-        adicionarNoFinal(atacando, atacado, i, ordem);
+        adicionarNoFinal(atacando, i, ordem);
+        if (!atacado.isEmpty()) {
+            adicionarNoFinal(atacado, i, ordem);
+        }
     }
 
 }

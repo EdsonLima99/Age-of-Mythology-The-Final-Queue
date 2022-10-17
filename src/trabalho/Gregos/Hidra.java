@@ -20,39 +20,30 @@ public class Hidra extends Guerreiro {
         super(nome, idade, peso);
     }
 
-    public static void recuperaHidra(ArrayList<Guerreiro> guerreiro, int i) {
-        int cont;
-
-        for (cont = 1; cont < guerreiro.size(); cont++) {
-            if (guerreiro.get(cont).getClass().getSimpleName().equals("Hidra")) {
-                guerreiro.get(cont).setEnergia(guerreiro.get(cont).getEnergia() + 10);
-            }
-            if (guerreiro.get(cont).getEnergia() > 100 && guerreiro.get(cont).getClass().getSimpleName().equals("Hidra")) {
-                guerreiro.get(cont).setEnergia(100);
-            }
-
+    public static void recuperaHidra(Guerreiro guerreiro, int i) {
+        guerreiro.setEnergia(guerreiro.getEnergia() + 10);
+        if (guerreiro.getEnergia() > 100) {
+            guerreiro.setEnergia(100);
         }
     }
 
     @Override
     public void atacar(ArrayList<Guerreiro> atacando, ArrayList<Guerreiro> atacado, int i, int ordem) {
-        if (!atacado.isEmpty()) {
-            int energiaPrometeano = verificaPrometeano(atacado, i);
+        int energiaPrometeano = verificaPrometeano(atacado, i);
 
-            atacado.get(i).setEnergia(atacado.get(i).getEnergia() - ataque);
+        atacado.get(i).setEnergia(atacado.get(i).getEnergia() - ataque);
 
-            if (atacado.get(i).getEnergia() <= 0) {
-                morre(atacando, atacado, i, energiaPrometeano);
-                recuperaHidra(atacando, i);
-                ataque += 10 * qtdCabecas;
-                qtdCabecas++;
-            }
-            //        ataquemorre(atacado, i, ataque);
+        if (atacado.get(i).getEnergia() <= 0) {
+            morre(atacando, atacado, i, energiaPrometeano);
+            recuperaHidra(this, i);
+            ataque += 10 * qtdCabecas;
+            qtdCabecas++;
         }
 
-//        recuperaHidra(atacando, i);
-//        recuperaHidra(atacado, i);
-        adicionarNoFinal(atacando, atacado, i, ordem);
+        adicionarNoFinal(atacando, i, ordem);
+        if (!atacado.isEmpty()) {
+            adicionarNoFinal(atacado, i, ordem);
+        }
     }
 
 }
