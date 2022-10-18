@@ -18,12 +18,14 @@ public abstract class Guerreiro {
     private int idade;
     private double peso;
     private int energia;
+    private int pronto;
 
     public Guerreiro(String nome, int idade, double peso) {
         this.nome = nome;
         this.idade = idade;
         this.peso = peso;
         this.energia = 100;
+        this.pronto = 0;
     }
 
     public String getNome() {
@@ -58,6 +60,14 @@ public abstract class Guerreiro {
         this.energia = energia;
     }
 
+    public int getPronto() {
+        return pronto;
+    }
+
+    public void setPronto(int pronto) {
+        this.pronto = pronto;
+    }
+    
     public abstract void atacar(ArrayList<Guerreiro> atacando, ArrayList<Guerreiro> guerreiro, int i, int ordem);
     
     public static void morre(ArrayList<Guerreiro> atacando, ArrayList<Guerreiro> atacado, int i, int energiaPrometeano) {
@@ -87,6 +97,7 @@ public abstract class Guerreiro {
     }//morre
 
     public static void adicionarNoFinal(ArrayList<Guerreiro> guerreiro, int i) {
+        guerreiro.get(i).setPronto(0);
         guerreiro.add(guerreiro.get(i));
         guerreiro.remove(i);
     }
@@ -104,5 +115,20 @@ public abstract class Guerreiro {
             energiaPrometeano = guerreiro.get(i).getEnergia();
         }
         return energiaPrometeano;
+    }
+    
+    public static void rodada(ArrayList<Guerreiro> atacando, ArrayList<Guerreiro> atacado){
+        atacando.get(0).setPronto(1);
+        atacado.get(0).setPronto(1);
+        
+        atacando.get(0).atacar(atacando, atacado, 0, 1);
+        if(!atacado.isEmpty() && atacado.get(0).getPronto() == 1){
+            atacado.get(0).atacar(atacando, atacado, 0, 2);
+        }
+        
+        adicionarNoFinal(atacando, 0);
+        if (!atacado.isEmpty() && atacado.get(0).getPronto() == 1) {
+            adicionarNoFinal(atacado, 0);
+        }
     }
 }

@@ -54,19 +54,21 @@ public class Trabalho {
             }
 
             if (ordem == true) {
-                if (!lado2.isEmpty()) {
-                    lado1.get(0).atacar(lado1, lado2, 0, 1);
-                }
-                if (!lado2.isEmpty() && !lado1.get(lado1.size() - 1).getClass().getSimpleName().equals("Ciclope")) {
-                    lado2.get(0).atacar(lado2, lado1, 0, 2);
-                }
+                Guerreiro.rodada(lado1, lado2);
+//                if (!lado2.isEmpty()) {
+//                    lado1.get(0).atacar(lado1, lado2, 0, 1);
+//                }
+//                if (!lado2.isEmpty() && !lado1.get(lado1.size() - 1).getClass().getSimpleName().equals("Ciclope")) {
+//                    lado2.get(0).atacar(lado2, lado1, 0, 2);
+//                }
             } else {
-                if (!lado1.isEmpty()) {
-                    lado2.get(0).atacar(lado2, lado1, 0, 1);
-                }
-                if (!lado1.isEmpty()) {
-                    lado1.get(0).atacar(lado1, lado2, 0, 2);
-                }
+                Guerreiro.rodada(lado2, lado1);
+//                if (!lado1.isEmpty()) {
+//                    lado2.get(0).atacar(lado2, lado1, 0, 1);
+//                }
+//                if (!lado1.isEmpty()) {
+//                    lado1.get(0).atacar(lado1, lado2, 0, 2);
+//                }
 
             }
 

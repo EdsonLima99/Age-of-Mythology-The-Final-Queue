@@ -37,9 +37,9 @@ public class Valquiria extends Guerreiro {
             morre(atacando, atacado, i, energiaPrometeano);
         }
         recuperarEnergia(atacando, i);
-        adicionarNoFinal(atacando, i, ordem);
-        if (!atacado.isEmpty()) {
-            adicionarNoFinal(atacado, i, ordem);
-        }
+//        adicionarNoFinal(atacando, i, ordem);
+//        if (!atacado.isEmpty()) {
+//            adicionarNoFinal(atacado, i, ordem);
+//        }
     }
 }

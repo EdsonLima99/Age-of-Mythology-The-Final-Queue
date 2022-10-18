@@ -16,7 +16,7 @@ public class Mumia extends Guerreiro {
     public Mumia(String nome, int idade, double peso) {
         super(nome, idade, peso);
     }
-
+    
     @Override
     public void atacar(ArrayList<Guerreiro> atacando, ArrayList<Guerreiro> atacado, int i, int ordem) {
         atacado.get(i).setEnergia(atacado.get(i).getEnergia() - 50);
@@ -24,11 +24,6 @@ public class Mumia extends Guerreiro {
         if (atacado.get(i).getEnergia() <= 0) {
             atacando.add(new Morto(atacado.get(i).getNome(), atacado.get(i).getIdade(), atacado.get(i).getPeso()));
             morre(atacando, atacado, i, 0);
-        }
-
-        adicionarNoFinal(atacando, i, ordem);
-        if (!atacado.isEmpty()) {
-            adicionarNoFinal(atacado, i, ordem);
         }
     }
 

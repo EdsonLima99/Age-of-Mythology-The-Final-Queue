@@ -32,12 +32,9 @@ public class Anubita extends Guerreiro {
             morre(atacando, atacado, i, 0);
         }
 
-//        atacando.add(this);
-//        atacando.remove(i);
-
-        adicionarNoFinal(atacando, i, ordem);
-        if (!atacado.isEmpty()) {
-            adicionarNoFinal(atacado, i, ordem);
-        }
+//        adicionarNoFinal(atacando, i, ordem);
+//        if (!atacado.isEmpty()) {
+//            adicionarNoFinal(atacado, i, ordem);
+//        }
     }
 }

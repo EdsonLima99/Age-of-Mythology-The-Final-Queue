@@ -12,7 +12,7 @@ import trabalho.Guerreiro;
  * @author CONEXOS
  */
 public class Argus extends Guerreiro {
-
+    
     public Argus(String nome, int idade, double peso) {
         super(nome, idade, peso);
         this.setEnergia(60);
@@ -26,9 +26,9 @@ public class Argus extends Guerreiro {
             morre(atacando, atacado, i, 0);
         }
         
-        adicionarNoFinal(atacando, i, ordem);
-        if (!atacado.isEmpty()) {
-            adicionarNoFinal(atacado, i, ordem);
-        }
+//        adicionarNoFinal(atacando, i, ordem);
+//        if (!atacado.isEmpty()) {
+//            adicionarNoFinal(atacado, i, ordem);
+//        }
     }
 }

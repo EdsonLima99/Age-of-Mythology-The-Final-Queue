@@ -27,10 +27,10 @@ public class Satiro extends Guerreiro {
                 morre(atacando, atacado, cont, 0);
             }
         }
-
-        adicionarNoFinal(atacando, i, ordem);
-        if (!atacado.isEmpty()) {
-            adicionarNoFinal(atacado, i, ordem);
-        }
+        
+//        adicionarNoFinal(atacando, i, ordem);
+//        if (!atacado.isEmpty()) {
+//            adicionarNoFinal(atacado, i, ordem);
+//        }
     }
 }
