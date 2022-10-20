@@ -36,6 +36,26 @@ public class Trabalho {
         return energia;
     }
 
+    public static void rodada(ArrayList<Guerreiro> atacando, ArrayList<Guerreiro> atacado) {
+
+        atacando.get(0).setPronto(1);
+        atacado.get(0).setPronto(1);
+
+        atacando.get(0).atacar(atacando, atacado, 0, 1);
+        
+        if (!atacado.isEmpty() && atacado.get(0).getPronto() == 1) {
+            atacado.get(0).atacar(atacado, atacando, 0, 2);
+        }
+
+        if (!atacando.isEmpty() && atacando.get(0).getPronto() == 1) {
+            Guerreiro.adicionarNoFinal(atacando, 0);
+        }
+
+        if (!atacado.isEmpty() && atacado.get(0).getPronto() == 1) {
+            Guerreiro.adicionarNoFinal(atacado, 0);
+        }
+    }
+
     public static void guerra(ArrayList<Guerreiro> lado1, ArrayList<Guerreiro> lado2) throws FileNotFoundException {
         Random aleatorio = new Random();
         Guerreiro perdedor = null;
@@ -55,17 +75,11 @@ public class Trabalho {
 
             if (ordem == true) {
                 if (!lado2.isEmpty()) {
-                    lado1.get(0).atacar(lado1, lado2, 0, 1);
-                }
-                if (!lado2.isEmpty() && !lado1.get(lado1.size() - 1).getClass().getSimpleName().equals("Ciclope")) {
-                    lado2.get(0).atacar(lado2, lado1, 0, 2);
+                    rodada(lado1, lado2);
                 }
             } else {
                 if (!lado1.isEmpty()) {
-                    lado2.get(0).atacar(lado2, lado1, 0, 1);
-                }
-                if (!lado1.isEmpty()) {
-                    lado1.get(0).atacar(lado1, lado2, 0, 2);
+                    rodada(lado2, lado1);
                 }
 
             }

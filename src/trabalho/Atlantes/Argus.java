@@ -23,12 +23,7 @@ public class Argus extends Guerreiro {
         atacado.get(i).setEnergia(0);
 
         if (atacado.get(i).getEnergia() <= 0) {
-            morre(atacando, atacado, i, 0);
-        }
-        
-        adicionarNoFinal(atacando, i, ordem);
-        if (!atacado.isEmpty()) {
-            adicionarNoFinal(atacado, i, ordem);
+            matar(atacando, atacado, i, 0);
         }
     }
 }

@@ -36,12 +36,7 @@ public class LoboDeFenris extends Guerreiro {
         atacado.get(i).setEnergia(atacado.get(i).getEnergia() - ataque);
 
         if (atacado.get(i).getEnergia() <= 0) {
-            morre(atacando, atacado, i, energiaPrometeano);
-        }
-        
-        adicionarNoFinal(atacando, i, ordem);
-        if (!atacado.isEmpty()) {
-            adicionarNoFinal(atacado, i, ordem);
+            matar(atacando, atacado, i, energiaPrometeano);
         }
     }
 

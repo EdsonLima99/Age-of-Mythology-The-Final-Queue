@@ -18,12 +18,14 @@ public abstract class Guerreiro {
     private int idade;
     private double peso;
     private int energia;
+    private int pronto;
 
     public Guerreiro(String nome, int idade, double peso) {
         this.nome = nome;
         this.idade = idade;
         this.peso = peso;
         this.energia = 100;
+        this.pronto = 0;
     }
 
     public String getNome() {
@@ -58,16 +60,24 @@ public abstract class Guerreiro {
         this.energia = energia;
     }
 
+    public int getPronto() {
+        return pronto;
+    }
+
+    public void setPronto(int pronto) {
+        this.pronto = pronto;
+    }
+    
     public abstract void atacar(ArrayList<Guerreiro> atacando, ArrayList<Guerreiro> guerreiro, int i, int ordem);
     
-    public static void morre(ArrayList<Guerreiro> atacando, ArrayList<Guerreiro> atacado, int i, int energiaPrometeano) {
+    public static void matar(ArrayList<Guerreiro> atacando, ArrayList<Guerreiro> atacado, int i, int energiaPrometeano) {
         if (atacado.get(i).getEnergia() <= 0) {//Se a energia do atacado for menor que 0
             switch (atacado.get(i).getClass().getSimpleName()) {//Switch com o nome da Classe
                 case "Mumia"://caso Múmia
-                    atacado.add(new Anubita(atacando.get(i).getNome(), 0, 60));//adiciona no atacado um novo Anubita
-                    atacado.add(new Anubita(atacando.get(i).getNome(), 0, 60));//adiciona no atacado um novo Anubita
-                    atacado.add(new Anubita(atacando.get(i).getNome(), 0, 60));//adiciona no atacado um novo Anubita
-                    atacado.add(new Anubita(atacando.get(i).getNome(), 0, 60));//adiciona no atacado um novo Anubita
+                    atacado.add(new Anubita(atacado.get(i).getNome(), 0, 60));//adiciona no atacado um novo Anubita
+                    atacado.add(new Anubita(atacado.get(i).getNome(), 0, 60));//adiciona no atacado um novo Anubita
+                    atacado.add(new Anubita(atacado.get(i).getNome(), 0, 60));//adiciona no atacado um novo Anubita
+                    atacado.add(new Anubita(atacado.get(i).getNome(), 0, 60));//adiciona no atacado um novo Anubita
                     atacado.remove(i);
                     break;
                 case "Prometeano"://caso Prometeano
@@ -87,15 +97,9 @@ public abstract class Guerreiro {
     }//morre
 
     public static void adicionarNoFinal(ArrayList<Guerreiro> guerreiro, int i) {
+        guerreiro.get(0).setPronto(0);
         guerreiro.add(guerreiro.get(i));
         guerreiro.remove(i);
-    }
-
-    public static void adicionarNoFinal(ArrayList<Guerreiro> guerreiro, int i, int ordem) {
-        if (ordem == 2) {
-            guerreiro.add(guerreiro.get(i));
-            guerreiro.remove(i);
-        }
     }
 
     public static int verificaPrometeano(ArrayList<Guerreiro> guerreiro, int i) {

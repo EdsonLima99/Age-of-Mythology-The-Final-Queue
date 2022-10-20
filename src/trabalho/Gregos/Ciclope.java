@@ -23,17 +23,12 @@ public class Ciclope extends Guerreiro {
 
         if (ordem == 1) {
             atacado.get(i).setEnergia(atacado.get(i).getEnergia() - 40);
-
+            atacado.get(i).setPronto(0);
             if (atacado.get(i).getEnergia() <= 0) {
-                morre(atacando, atacado, i, energiaPrometeano);
-                adicionarNoFinal(atacando, i, 2);
-                return;
+                matar(atacando, atacado, i, energiaPrometeano);
+            } else {
+                adicionarNoFinal(atacado, i);
             }
-        }
-
-        adicionarNoFinal(atacando, i, 2);
-        if (!atacado.isEmpty()) {
-            adicionarNoFinal(atacado, i, 2);
         }
     }
 

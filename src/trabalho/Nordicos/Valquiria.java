@@ -21,7 +21,7 @@ public class Valquiria extends Guerreiro {
         if (atacando.size() > 1) {
             atacando.get(i + 1).setEnergia(atacando.get(i + 1).getEnergia() + 20);
 
-            if (atacando.get(i + 1).getEnergia() > 100 && !(atacando.get(i + 1).getClass().getSuperclass().getSimpleName().equals("Nordicos"))) {
+            if (atacando.get(i + 1).getEnergia() > 100 && !(atacando.get(i + 1).getClass().getPackageName().equals("trabalho.Nordicos"))) {
                 atacando.get(i + 1).setEnergia(100);
             }
         }
@@ -34,12 +34,8 @@ public class Valquiria extends Guerreiro {
         atacado.get(i).setEnergia(atacado.get(i).getEnergia() - 20);
 
         if (atacado.get(i).getEnergia() <= 0) {
-            morre(atacando, atacado, i, energiaPrometeano);
+            matar(atacando, atacado, i, energiaPrometeano);
         }
         recuperarEnergia(atacando, i);
-        adicionarNoFinal(atacando, i, ordem);
-        if (!atacado.isEmpty()) {
-            adicionarNoFinal(atacado, i, ordem);
-        }
     }
 }
