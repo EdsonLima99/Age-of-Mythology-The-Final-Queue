@@ -34,21 +34,18 @@ public class LeaoDeNemeia extends Guerreiro {
                 atacado.get(i + 2).setEnergia(atacado.get(i + 2).getEnergia() - 5);
 
                 if (atacado.get(i + 2).getEnergia() <= 0) {
-                    morre(atacando, atacado, (i + 2), energiaPrometeano3);
+                    matar(atacando, atacado, (i + 2), energiaPrometeano3);
                 }
             }
+
             if (atacado.get(i + 1).getEnergia() <= 0) {
-                morre(atacando, atacado, (i + 1), energiaPrometeano2);
+                matar(atacando, atacado, (i + 1), energiaPrometeano2);
             }
         }
-        if (atacado.get(i).getEnergia() <= 0) {
-            morre(atacando, atacado, i, energiaPrometeano1);
-        }
 
-//        adicionarNoFinal(atacando, i, ordem);
-//        if (!atacado.isEmpty()) {
-//            adicionarNoFinal(atacado, i, ordem);
-//        }
+        if (atacado.get(i).getEnergia() <= 0) {
+            matar(atacando, atacado, i, energiaPrometeano1);
+        }
     }
 
 }

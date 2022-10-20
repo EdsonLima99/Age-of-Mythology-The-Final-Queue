@@ -22,12 +22,7 @@ public class Morto extends Mumia {
         atacado.get(i).setEnergia(atacado.get(i).getEnergia() - 5);
 
         if (atacado.get(i).getEnergia() <= 0) {
-            morre(atacando, atacado, i, 0);
+            matar(atacando, atacado, i, 0);
         }
-
-//        adicionarNoFinal(atacando, i, ordem);
-//        if (!atacado.isEmpty()) {
-//            adicionarNoFinal(atacado, i, ordem);
-//        }
     }
 }

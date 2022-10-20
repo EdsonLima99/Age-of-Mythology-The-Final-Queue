@@ -70,14 +70,14 @@ public abstract class Guerreiro {
     
     public abstract void atacar(ArrayList<Guerreiro> atacando, ArrayList<Guerreiro> guerreiro, int i, int ordem);
     
-    public static void morre(ArrayList<Guerreiro> atacando, ArrayList<Guerreiro> atacado, int i, int energiaPrometeano) {
+    public static void matar(ArrayList<Guerreiro> atacando, ArrayList<Guerreiro> atacado, int i, int energiaPrometeano) {
         if (atacado.get(i).getEnergia() <= 0) {//Se a energia do atacado for menor que 0
             switch (atacado.get(i).getClass().getSimpleName()) {//Switch com o nome da Classe
                 case "Mumia"://caso Múmia
-                    atacado.add(new Anubita(atacando.get(i).getNome(), 0, 60));//adiciona no atacado um novo Anubita
-                    atacado.add(new Anubita(atacando.get(i).getNome(), 0, 60));//adiciona no atacado um novo Anubita
-                    atacado.add(new Anubita(atacando.get(i).getNome(), 0, 60));//adiciona no atacado um novo Anubita
-                    atacado.add(new Anubita(atacando.get(i).getNome(), 0, 60));//adiciona no atacado um novo Anubita
+                    atacado.add(new Anubita(atacado.get(i).getNome(), 0, 60));//adiciona no atacado um novo Anubita
+                    atacado.add(new Anubita(atacado.get(i).getNome(), 0, 60));//adiciona no atacado um novo Anubita
+                    atacado.add(new Anubita(atacado.get(i).getNome(), 0, 60));//adiciona no atacado um novo Anubita
+                    atacado.add(new Anubita(atacado.get(i).getNome(), 0, 60));//adiciona no atacado um novo Anubita
                     atacado.remove(i);
                     break;
                 case "Prometeano"://caso Prometeano
@@ -97,16 +97,9 @@ public abstract class Guerreiro {
     }//morre
 
     public static void adicionarNoFinal(ArrayList<Guerreiro> guerreiro, int i) {
-        guerreiro.get(i).setPronto(0);
+        guerreiro.get(0).setPronto(0);
         guerreiro.add(guerreiro.get(i));
         guerreiro.remove(i);
-    }
-
-    public static void adicionarNoFinal(ArrayList<Guerreiro> guerreiro, int i, int ordem) {
-        if (ordem == 2) {
-            guerreiro.add(guerreiro.get(i));
-            guerreiro.remove(i);
-        }
     }
 
     public static int verificaPrometeano(ArrayList<Guerreiro> guerreiro, int i) {
@@ -115,20 +108,5 @@ public abstract class Guerreiro {
             energiaPrometeano = guerreiro.get(i).getEnergia();
         }
         return energiaPrometeano;
-    }
-    
-    public static void rodada(ArrayList<Guerreiro> atacando, ArrayList<Guerreiro> atacado){
-        atacando.get(0).setPronto(1);
-        atacado.get(0).setPronto(1);
-        
-        atacando.get(0).atacar(atacando, atacado, 0, 1);
-        if(!atacado.isEmpty() && atacado.get(0).getPronto() == 1){
-            atacado.get(0).atacar(atacando, atacado, 0, 2);
-        }
-        
-        adicionarNoFinal(atacando, 0);
-        if (!atacado.isEmpty() && atacado.get(0).getPronto() == 1) {
-            adicionarNoFinal(atacado, 0);
-        }
     }
 }

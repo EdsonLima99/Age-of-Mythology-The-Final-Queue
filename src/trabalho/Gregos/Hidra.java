@@ -13,8 +13,8 @@ import trabalho.Guerreiro;
  */
 public class Hidra extends Guerreiro {
 
-    private static int qtdCabecas = 1;
-    private static int ataque = 50;
+    private int qtdCabecas = 1;
+    private int ataque = 50;
 
     public Hidra(String nome, int idade, double peso) {
         super(nome, idade, peso);
@@ -34,16 +34,11 @@ public class Hidra extends Guerreiro {
         atacado.get(i).setEnergia(atacado.get(i).getEnergia() - ataque);
 
         if (atacado.get(i).getEnergia() <= 0) {
-            morre(atacando, atacado, i, energiaPrometeano);
+            matar(atacando, atacado, i, energiaPrometeano);
             recuperaHidra(this, i);
             ataque += 10 * qtdCabecas;
             qtdCabecas++;
         }
-
-//        adicionarNoFinal(atacando, i, ordem);
-//        if (!atacado.isEmpty()) {
-//            adicionarNoFinal(atacado, i, ordem);
-//        }
     }
 
 }

@@ -25,16 +25,11 @@ public class Anubita extends Guerreiro {
         atacado.get(cont).setEnergia(atacado.get(cont).getEnergia() - 15);
 
         if (atacado.get(cont).getEnergia() <= 0) {
-            morre(atacando, atacado, cont, 0);
-        }
-        
-        if (!atacado.isEmpty() && atacado.get(i).getEnergia() <= 0) {
-            morre(atacando, atacado, i, 0);
+            matar(atacando, atacado, cont, 0);
         }
 
-//        adicionarNoFinal(atacando, i, ordem);
-//        if (!atacado.isEmpty()) {
-//            adicionarNoFinal(atacado, i, ordem);
-//        }
+        if (!atacado.isEmpty() && atacado.get(i).getEnergia() <= 0) {
+            matar(atacando, atacado, i, 0);
+        }
     }
 }

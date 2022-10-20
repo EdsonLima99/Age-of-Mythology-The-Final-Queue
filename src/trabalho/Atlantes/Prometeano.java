@@ -16,7 +16,7 @@ public class Prometeano extends Guerreiro {
     public Prometeano(String nome, int idade, double peso) {
         super(nome, idade, peso);
     }
-    
+
     public Prometeano(Guerreiro guerreiro, int energia) {
         super(guerreiro.getNome(), guerreiro.getIdade(), guerreiro.getPeso());
         this.setEnergia(energia);
@@ -27,12 +27,7 @@ public class Prometeano extends Guerreiro {
         atacado.get(i).setEnergia(atacado.get(i).getEnergia() - 10);
 
         if (atacado.get(i).getEnergia() <= 0) {
-            morre(atacando, atacado, i, 0);
+            matar(atacando, atacado, i, 0);
         }
-
-//        adicionarNoFinal(atacando, i, ordem);
-//        if (!atacado.isEmpty()) {
-//            adicionarNoFinal(atacado, i, ordem);
-//        }
     }
 }

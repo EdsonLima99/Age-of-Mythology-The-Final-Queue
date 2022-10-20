@@ -24,13 +24,9 @@ public class Satiro extends Guerreiro {
         for (cont = 0; cont < atacado.size(); cont++) {
             atacado.get(cont).setEnergia(atacado.get(cont).getEnergia() - 5);
             if (atacado.get(cont).getEnergia() <= 0) {
-                morre(atacando, atacado, cont, 0);
+                matar(atacando, atacado, cont, 0);
+                cont--;
             }
         }
-        
-//        adicionarNoFinal(atacando, i, ordem);
-//        if (!atacado.isEmpty()) {
-//            adicionarNoFinal(atacado, i, ordem);
-//        }
     }
 }
