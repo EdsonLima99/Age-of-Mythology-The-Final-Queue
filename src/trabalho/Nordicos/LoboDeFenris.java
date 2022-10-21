@@ -9,7 +9,7 @@ import trabalho.Guerreiro;
 
 /**
  *
- * @author CONEXOS
+ * @author Edson Lima e Matheus Gonçalves
  */
 public class LoboDeFenris extends Guerreiro {
 
@@ -36,7 +36,7 @@ public class LoboDeFenris extends Guerreiro {
         atacado.get(i).setEnergia(atacado.get(i).getEnergia() - ataque);
 
         if (atacado.get(i).getEnergia() <= 0) {
-            matar(atacando, atacado, i, energiaPrometeano);
+            morrer(atacando, atacado, i, energiaPrometeano);
         }
     }
 

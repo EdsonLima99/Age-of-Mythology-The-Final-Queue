@@ -9,7 +9,7 @@ import trabalho.Guerreiro;
 
 /**
  *
- * @author CONEXOS
+ * @author Edson Lima e Matheus Gonçalves
  */
 public class LeaoDeNemeia extends Guerreiro {
 
@@ -34,17 +34,17 @@ public class LeaoDeNemeia extends Guerreiro {
                 atacado.get(i + 2).setEnergia(atacado.get(i + 2).getEnergia() - 5);
 
                 if (atacado.get(i + 2).getEnergia() <= 0) {
-                    matar(atacando, atacado, (i + 2), energiaPrometeano3);
+                    morrer(atacando, atacado, (i + 2), energiaPrometeano3);
                 }
             }
 
             if (atacado.get(i + 1).getEnergia() <= 0) {
-                matar(atacando, atacado, (i + 1), energiaPrometeano2);
+                morrer(atacando, atacado, (i + 1), energiaPrometeano2);
             }
         }
 
         if (atacado.get(i).getEnergia() <= 0) {
-            matar(atacando, atacado, i, energiaPrometeano1);
+            morrer(atacando, atacado, i, energiaPrometeano1);
         }
     }
 

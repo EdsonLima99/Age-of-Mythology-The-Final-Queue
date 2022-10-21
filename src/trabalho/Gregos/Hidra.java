@@ -9,7 +9,7 @@ import trabalho.Guerreiro;
 
 /**
  *
- * @author CONEXOS
+ * @author Edson Lima e Matheus Gonçalves
  */
 public class Hidra extends Guerreiro {
 
@@ -34,7 +34,7 @@ public class Hidra extends Guerreiro {
         atacado.get(i).setEnergia(atacado.get(i).getEnergia() - ataque);
 
         if (atacado.get(i).getEnergia() <= 0) {
-            matar(atacando, atacado, i, energiaPrometeano);
+            morrer(atacando, atacado, i, energiaPrometeano);
             recuperaHidra(this, i);
             ataque += 10 * qtdCabecas;
             qtdCabecas++;

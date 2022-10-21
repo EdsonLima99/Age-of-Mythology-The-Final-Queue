@@ -9,7 +9,7 @@ import trabalho.Guerreiro;
 
 /**
  *
- * @author CONEXOS
+ * @author Edson Lima e Matheus Gonçalves
  */
 public class Mumia extends Guerreiro {
 
@@ -23,7 +23,7 @@ public class Mumia extends Guerreiro {
 
         if (atacado.get(i).getEnergia() <= 0) {
             atacando.add(new Morto(atacado.get(i).getNome(), atacado.get(i).getIdade(), atacado.get(i).getPeso()));
-            matar(atacando, atacado, i, 0);
+            morrer(atacando, atacado, i, 0);
         }
     }
 

@@ -10,7 +10,7 @@ import trabalho.Egipcios.Anubita;
 
 /**
  *
- * @author CONEXOS
+ * @author Edson Lima e Matheus Gonçalves
  */
 public abstract class Guerreiro {
 
@@ -67,10 +67,10 @@ public abstract class Guerreiro {
     public void setPronto(int pronto) {
         this.pronto = pronto;
     }
-    
+
     public abstract void atacar(ArrayList<Guerreiro> atacando, ArrayList<Guerreiro> guerreiro, int i, int ordem);
-    
-    public static void matar(ArrayList<Guerreiro> atacando, ArrayList<Guerreiro> atacado, int i, int energiaPrometeano) {
+
+    public static void morrer(ArrayList<Guerreiro> atacando, ArrayList<Guerreiro> atacado, int i, int energiaPrometeano) {
         if (atacado.get(i).getEnergia() <= 0) {//Se a energia do atacado for menor que 0
             switch (atacado.get(i).getClass().getSimpleName()) {//Switch com o nome da Classe
                 case "Mumia"://caso Múmia

@@ -9,7 +9,7 @@ import trabalho.Guerreiro;
 
 /**
  *
- * @author CONEXOS
+ * @author Edson Lima e Matheus Gonçalves
  */
 public class Satiro extends Guerreiro {
 
@@ -24,7 +24,7 @@ public class Satiro extends Guerreiro {
         for (cont = 0; cont < atacado.size(); cont++) {
             atacado.get(cont).setEnergia(atacado.get(cont).getEnergia() - 5);
             if (atacado.get(cont).getEnergia() <= 0) {
-                matar(atacando, atacado, cont, 0);
+                morrer(atacando, atacado, cont, 0);
                 cont--;
             }
         }

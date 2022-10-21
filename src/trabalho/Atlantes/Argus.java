@@ -9,7 +9,7 @@ import trabalho.Guerreiro;
 
 /**
  *
- * @author CONEXOS
+ * @author Edson Lima e Matheus Gonçalves
  */
 public class Argus extends Guerreiro {
 
@@ -23,7 +23,7 @@ public class Argus extends Guerreiro {
         atacado.get(i).setEnergia(0);
 
         if (atacado.get(i).getEnergia() <= 0) {
-            matar(atacando, atacado, i, 0);
+            morrer(atacando, atacado, i, 0);
         }
     }
 }

@@ -9,7 +9,7 @@ import trabalho.Guerreiro;
 
 /**
  *
- * @author CONEXOS
+ * @author Edson Lima e Matheus Gonçalves
  */
 public class Ciclope extends Guerreiro {
 
@@ -25,7 +25,7 @@ public class Ciclope extends Guerreiro {
             atacado.get(i).setEnergia(atacado.get(i).getEnergia() - 40);
             atacado.get(i).setPronto(0);
             if (atacado.get(i).getEnergia() <= 0) {
-                matar(atacando, atacado, i, energiaPrometeano);
+                morrer(atacando, atacado, i, energiaPrometeano);
             } else {
                 adicionarNoFinal(atacado, i);
             }

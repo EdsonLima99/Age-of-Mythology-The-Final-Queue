@@ -22,7 +22,7 @@ import trabalho.Nordicos.Valquiria;
 
 /**
  *
- * @author Edson Lima
+ * @author Edson Lima e Matheus Gonçalves
  */
 public class Trabalho {
 
@@ -90,12 +90,12 @@ public class Trabalho {
 
         if (somaEnergia1 > 0) {
             System.out.println("Gregos e Nórdicos venceram.");
-            System.out.println(perdedor.getNome() + "\t" + perdedor.getIdade() + "\t" + (int) perdedor.getPeso());
-            System.out.println(vencedor.getNome() + "\t" + vencedor.getIdade() + "\t" + (int) vencedor.getPeso());
+            System.out.println(perdedor.getNome() + ", " + perdedor.getIdade() + ", " + (int) perdedor.getPeso());
+            System.out.println(vencedor.getNome() + ", " + vencedor.getIdade() + ", " + (int) vencedor.getPeso());
         } else {
             System.out.println("Atlantes e Egípcios venceram.");
-            System.out.println(perdedor.getNome() + "\t" + perdedor.getIdade() + "\t" + (int) perdedor.getPeso());
-            System.out.println(vencedor.getNome() + "\t" + vencedor.getIdade() + "\t" + (int) vencedor.getPeso());
+            System.out.println(perdedor.getNome() + ", " + perdedor.getIdade() + ", " + (int) perdedor.getPeso());
+            System.out.println(vencedor.getNome() + ", " + vencedor.getIdade() + ", " + (int) vencedor.getPeso());
         }
     }
 
