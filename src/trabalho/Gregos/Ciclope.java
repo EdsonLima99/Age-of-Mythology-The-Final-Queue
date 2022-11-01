@@ -4,8 +4,9 @@
  */
 package trabalho.Gregos;
 
-import java.util.ArrayList;
 import trabalho.Guerreiro;
+
+import java.util.List;
 
 /**
  *
@@ -13,23 +14,25 @@ import trabalho.Guerreiro;
  */
 public class Ciclope extends Guerreiro {
 
-    public Ciclope(String nome, int idade, double peso) {
+    public Ciclope(String nome, Integer idade, Double peso) {
         super(nome, idade, peso);
     }
 
     @Override
-    public void atacar(ArrayList<Guerreiro> atacando, ArrayList<Guerreiro> atacado, int i, int ordem) {
-        int energiaPrometeano = verificaPrometeano(atacado, i);
-
+    public void atacar(List<Guerreiro> atacando, List<Guerreiro> atacado, Integer posicao, Integer ordem) {
+        atacado.get(posicao).setEnergia(atacado.get(posicao).getEnergia() - 40);
         if (ordem == 1) {
-            atacado.get(i).setEnergia(atacado.get(i).getEnergia() - 40);
-            atacado.get(i).setPronto(0);
-            if (atacado.get(i).getEnergia() <= 0) {
-                morrer(atacando, atacado, i, energiaPrometeano);
-            } else {
-                adicionarNoFinal(atacado, i);
+            atacado.get(posicao).setPronto(0);
+            if (atacado.get(posicao).getEnergia() > 0) {
+                adicionarNoFinal(atacado);
             }
         }
     }
 
+    /*
+    Ciclope: um gigante de um olho só. Promove um ataque que retira 40 pontos de energia e
+    depois “joga” o adversário para o final de sua fila (na prática se for o primeiro a atacar não
+    vai permitir que o adversário ataque, se for o segundo, esse efeito não terá qualquer impacto
+    no que refere a dano ao adversário).
+     */
 }

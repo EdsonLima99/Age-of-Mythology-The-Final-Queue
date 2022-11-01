@@ -4,8 +4,10 @@
  */
 package trabalho.Nordicos;
 
-import java.util.ArrayList;
 import trabalho.Guerreiro;
+
+import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  *
@@ -13,31 +15,36 @@ import trabalho.Guerreiro;
  */
 public class LoboDeFenris extends Guerreiro {
 
-    private int ataque = 40;
+    private Integer ataque = 40;
 
-    public LoboDeFenris(String nome, int idade, double peso) {
+    public LoboDeFenris(String nome, Integer idade, Double peso) {
         super(nome, idade, peso);
     }
 
     @Override
-    public void atacar(ArrayList<Guerreiro> atacando, ArrayList<Guerreiro> atacado, int i, int ordem) {
-        int energiaPrometeano = verificaPrometeano(atacado, i);
+    public void atacar(List<Guerreiro> atacando, List<Guerreiro> atacado, Integer posicao, Integer ordem) {
+        verificarQtdLobos(atacando);
+        atacado.get(posicao).setEnergia(atacado.get(posicao).getEnergia() - ataque);
+    }
 
-        int cont = 1, qtdLobos = 0;
+
+    private void verificarQtdLobos(List<Guerreiro> atacando){
+        AtomicInteger cont = new AtomicInteger();
+        AtomicInteger qtdLobos = new AtomicInteger();
 
         if (atacando.size() > 1) {
-            while (cont < atacando.size() && atacando.get(cont).getClass().getSimpleName().equals("LoboDeFenris")) {
-                qtdLobos += 1;
-                cont++;
+            while (cont.get() < atacando.size() && atacando.get(cont.getAndIncrement()).getClass().getSimpleName().equals("LoboDeFenris")) {
+                qtdLobos.getAndIncrement();
             }
         }
-
-        ataque += (int) ((ataque * 0.2) * qtdLobos);
-        atacado.get(i).setEnergia(atacado.get(i).getEnergia() - ataque);
-
-        if (atacado.get(i).getEnergia() <= 0) {
-            morrer(atacando, atacado, i, energiaPrometeano);
-        }
+        ataque += (int) ((ataque * 0.2) * qtdLobos.get());
     }
+
+    /*
+    Lobo de Fenris: são lobos gigantes ferozes. Seu ataque é de 40 pontos de energia. Entretanto
+    seu ataque aumenta em 20% para cada Lobo de Fenris que estiver atrás dele. Ou seja, se
+    houverem 2 lobos na sequência na fila, o Lobo atual ganha mais 16 pontos de ataque (8 para
+    cada lobo) totalizando 56 pontos de ataque.
+     */
 
 }

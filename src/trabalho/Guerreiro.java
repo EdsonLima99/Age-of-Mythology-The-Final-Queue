@@ -4,9 +4,7 @@
  */
 package trabalho;
 
-import java.util.ArrayList;
-import trabalho.Atlantes.Prometeano;
-import trabalho.Egipcios.Anubita;
+import java.util.List;
 
 /**
  *
@@ -14,13 +12,17 @@ import trabalho.Egipcios.Anubita;
  */
 public abstract class Guerreiro {
 
-    private String nome;
-    private int idade;
-    private double peso;
-    private int energia;
-    private int pronto;
+    public static final Integer PRIMEIRA_POSICAO = 0;
+    public static final Integer SEGUNDA_POSICAO = 2;
+    public static final Integer TERCEIRA_POSICAO = 3;
 
-    public Guerreiro(String nome, int idade, double peso) {
+    private String nome;
+    private Integer idade;
+    private Double peso;
+    private Integer energia;
+    private Integer pronto;
+
+    public Guerreiro(String nome, Integer idade, Double peso) {
         this.nome = nome;
         this.idade = idade;
         this.peso = peso;
@@ -36,77 +38,53 @@ public abstract class Guerreiro {
         this.nome = nome;
     }
 
-    public int getIdade() {
+    public Integer getIdade() {
         return idade;
     }
 
-    public void setIdade(int idade) {
+    public void setIdade(Integer idade) {
         this.idade = idade;
     }
 
-    public double getPeso() {
+    public Double getPeso() {
         return peso;
     }
 
-    public void setPeso(double peso) {
+    public void setPeso(Double peso) {
         this.peso = peso;
     }
 
-    public int getEnergia() {
+    public Integer getEnergia() {
         return energia;
     }
 
-    public void setEnergia(int energia) {
+    public void setEnergia(Integer energia) {
         this.energia = energia;
     }
 
-    public int getPronto() {
+    public Integer getPronto() {
         return pronto;
     }
 
-    public void setPronto(int pronto) {
+    public void setPronto(Integer pronto) {
         this.pronto = pronto;
     }
 
-    public abstract void atacar(ArrayList<Guerreiro> atacando, ArrayList<Guerreiro> guerreiro, int i, int ordem);
+    public abstract void atacar(List<Guerreiro> atacando, List<Guerreiro> atacado, Integer posicao, Integer ordem);
 
-    public static void morrer(ArrayList<Guerreiro> atacando, ArrayList<Guerreiro> atacado, int i, int energiaPrometeano) {
-        if (atacado.get(i).getEnergia() <= 0) {//Se a energia do atacado for menor que 0
-            switch (atacado.get(i).getClass().getSimpleName()) {//Switch com o nome da Classe
-                case "Mumia"://caso Múmia
-                    atacado.add(new Anubita(atacado.get(i).getNome(), 0, 60));//adiciona no atacado um novo Anubita
-                    atacado.add(new Anubita(atacado.get(i).getNome(), 0, 60));//adiciona no atacado um novo Anubita
-                    atacado.add(new Anubita(atacado.get(i).getNome(), 0, 60));//adiciona no atacado um novo Anubita
-                    atacado.add(new Anubita(atacado.get(i).getNome(), 0, 60));//adiciona no atacado um novo Anubita
-                    atacado.remove(i);
-                    break;
-                case "Prometeano"://caso Prometeano
-                    if (energiaPrometeano > 1) {
-                        atacado.add(new Prometeano(atacado.get(i), (int) (energiaPrometeano * 0.5)));//adiciona no atacado um novo Prometeano
-                        atacado.add(new Prometeano(atacado.get(i), (int) (energiaPrometeano * 0.5)));//adiciona no atacado um novo Prometeano
-                        atacado.remove(i);
-                    } else {
-                        atacado.remove(i);
-                    }//if
-                    break;
-                default:
-                    atacado.remove(i);
-                    break;
-            }//switch
-        }//if
-    }//morre
-
-    public static void adicionarNoFinal(ArrayList<Guerreiro> guerreiro, int i) {
-        guerreiro.get(0).setPronto(0);
-        guerreiro.add(guerreiro.get(i));
-        guerreiro.remove(i);
+    public void morrer(List<Guerreiro> atacado, int posicao){
+        if(atacado.get(posicao).getEnergia() <= 0){
+            removerDaFila(atacado, posicao);
+        }
     }
 
-    public static int verificaPrometeano(ArrayList<Guerreiro> guerreiro, int i) {
-        int energiaPrometeano = 100;
-        if (guerreiro.get(i).getClass().getSimpleName().equals("Prometeano")) {
-            energiaPrometeano = guerreiro.get(i).getEnergia();
-        }
-        return energiaPrometeano;
+    public static void removerDaFila(List<Guerreiro> atacado, Integer posicao){
+        atacado.remove(posicao);
+    }
+
+    public static void adicionarNoFinal(List<Guerreiro> guerreiro) {
+        guerreiro.get(PRIMEIRA_POSICAO).setPronto(0);
+        guerreiro.add(guerreiro.get(PRIMEIRA_POSICAO));
+        guerreiro.remove(guerreiro.get(PRIMEIRA_POSICAO));
     }
 }

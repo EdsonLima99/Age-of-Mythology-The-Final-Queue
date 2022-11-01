@@ -4,8 +4,9 @@
  */
 package trabalho.Gregos;
 
-import java.util.ArrayList;
 import trabalho.Guerreiro;
+
+import java.util.List;
 
 /**
  *
@@ -13,39 +14,33 @@ import trabalho.Guerreiro;
  */
 public class LeaoDeNemeia extends Guerreiro {
 
-    public LeaoDeNemeia(String nome, int idade, double peso) {
+    public LeaoDeNemeia(String nome, Integer idade, Double peso) {
         super(nome, idade, peso);
     }
 
     @Override
-    public void atacar(ArrayList<Guerreiro> atacando, ArrayList<Guerreiro> atacado, int i, int ordem) {
-        int energiaPrometeano1 = verificaPrometeano(atacado, i);
+    public void atacar(List<Guerreiro> atacando, List<Guerreiro> atacado, Integer posicao, Integer ordem) {
 
-        atacado.get(i).setEnergia(atacado.get(i).getEnergia() - 30);
+        atacado.get(posicao).setEnergia(atacado.get(posicao).getEnergia() - 30);
 
         if (atacado.size() > 1) {
-            int energiaPrometeano2 = verificaPrometeano(atacado, (i + 1));
-
-            atacado.get(i + 1).setEnergia(atacado.get(i + 1).getEnergia() - 15);
-
+            atacado.get(SEGUNDA_POSICAO).setEnergia(atacado.get(SEGUNDA_POSICAO).getEnergia() - 15);
             if (atacado.size() > 2) {
-                int energiaPrometeano3 = verificaPrometeano(atacado, (i + 2));
-
-                atacado.get(i + 2).setEnergia(atacado.get(i + 2).getEnergia() - 5);
-
-                if (atacado.get(i + 2).getEnergia() <= 0) {
-                    morrer(atacando, atacado, (i + 2), energiaPrometeano3);
+                atacado.get(TERCEIRA_POSICAO).setEnergia(atacado.get(TERCEIRA_POSICAO).getEnergia() - 5);
+                if (atacado.get(TERCEIRA_POSICAO).getEnergia() <= 0) {
+                    morrer(atacado, TERCEIRA_POSICAO);
                 }
             }
-
-            if (atacado.get(i + 1).getEnergia() <= 0) {
-                morrer(atacando, atacado, (i + 1), energiaPrometeano2);
+            if (atacado.get(SEGUNDA_POSICAO).getEnergia() <= 0) {
+                morrer(atacado, SEGUNDA_POSICAO);
             }
-        }
-
-        if (atacado.get(i).getEnergia() <= 0) {
-            morrer(atacando, atacado, i, energiaPrometeano1);
         }
     }
 
+        /*
+        Leão da Nemeia: um leão muito forte e com rugido poderoso. Seu ataque é um grande
+    rugido que não afeta apenas o adversário sendo atacado, mas também seu sucessor e quem
+    sucedê-lo. Esse rugido afeta em 30 pontos de energia o adversário atacado, em 15 quem
+    estiver atrás dele na fila e em 5 quem estiver na terceira posição.
+         */
 }

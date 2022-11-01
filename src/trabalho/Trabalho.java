@@ -7,6 +7,7 @@ package trabalho;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 import trabalho.Atlantes.Argus;
@@ -26,41 +27,36 @@ import trabalho.Nordicos.Valquiria;
  */
 public class Trabalho {
 
-    public static int somarEnergia(ArrayList<Guerreiro> guerreiro) {
-        int energia = 0, i;
+    private static final int PRIMEIRA_POSICAO = 0;
 
-        for (i = 0; i < guerreiro.size(); i++) {
-            energia += guerreiro.get(i).getEnergia();
+    public static void rodada(List<Guerreiro> atacando, List<Guerreiro> atacado) {
+
+        atacando.get(PRIMEIRA_POSICAO).setPronto(1);
+        atacado.get(PRIMEIRA_POSICAO).setPronto(1);
+
+        atacando.get(PRIMEIRA_POSICAO).atacar(atacando, atacado, 0, 1);
+        atacado.get(PRIMEIRA_POSICAO).morrer(atacado, 0);
+
+        if (!atacado.isEmpty() && atacado.get(PRIMEIRA_POSICAO).getPronto() == 1) {
+            atacado.get(PRIMEIRA_POSICAO).atacar(atacado, atacando, 0, 2);
+            atacando.get(PRIMEIRA_POSICAO).morrer(atacando, 0);
         }
 
-        return energia;
-    }
-
-    public static void rodada(ArrayList<Guerreiro> atacando, ArrayList<Guerreiro> atacado) {
-
-        atacando.get(0).setPronto(1);
-        atacado.get(0).setPronto(1);
-
-        atacando.get(0).atacar(atacando, atacado, 0, 1);
-        
-        if (!atacado.isEmpty() && atacado.get(0).getPronto() == 1) {
-            atacado.get(0).atacar(atacado, atacando, 0, 2);
+        if (!atacando.isEmpty() && atacando.get(PRIMEIRA_POSICAO).getPronto() == 1) {
+            Guerreiro.adicionarNoFinal(atacando);
         }
 
-        if (!atacando.isEmpty() && atacando.get(0).getPronto() == 1) {
-            Guerreiro.adicionarNoFinal(atacando, 0);
-        }
-
-        if (!atacado.isEmpty() && atacado.get(0).getPronto() == 1) {
-            Guerreiro.adicionarNoFinal(atacado, 0);
+        if (!atacado.isEmpty() && atacado.get(PRIMEIRA_POSICAO).getPronto() == 1) {
+            Guerreiro.adicionarNoFinal(atacado);
         }
     }
 
-    public static void guerra(ArrayList<Guerreiro> lado1, ArrayList<Guerreiro> lado2) throws FileNotFoundException {
+    public static void guerra(List<Guerreiro> lado1, List<Guerreiro> lado2) throws FileNotFoundException {
         Random aleatorio = new Random();
         Guerreiro perdedor = null;
         Guerreiro vencedor = null;
-        int somaEnergia1 = somarEnergia(lado1), somaEnergia2 = somarEnergia(lado2);
+        int somaEnergia1 = FuncoesUtil.somarEnergia(lado1);
+        int somaEnergia2 = FuncoesUtil.somarEnergia(lado2);
 
         while (somaEnergia1 > 0 && somaEnergia2 > 0) {
             boolean ordem = aleatorio.nextBoolean();
@@ -73,7 +69,7 @@ public class Trabalho {
                 vencedor = lado2.get(0);
             }
 
-            if (ordem == true) {
+            if (ordem) {
                 if (!lado2.isEmpty()) {
                     rodada(lado1, lado2);
                 }
@@ -84,52 +80,22 @@ public class Trabalho {
 
             }
 
-            somaEnergia1 = somarEnergia(lado1);
-            somaEnergia2 = somarEnergia(lado2);
+            somaEnergia1 = FuncoesUtil.somarEnergia(lado1);
+            somaEnergia2 = FuncoesUtil.somarEnergia(lado2);
         }
 
         if (somaEnergia1 > 0) {
             System.out.println("Gregos e Nórdicos venceram.");
-            System.out.println(perdedor.getNome() + ", " + perdedor.getIdade() + ", " + (int) perdedor.getPeso());
-            System.out.println(vencedor.getNome() + ", " + vencedor.getIdade() + ", " + (int) vencedor.getPeso());
+            System.out.println(perdedor.getNome() + ", " + perdedor.getIdade() + ", " + perdedor.getPeso());
+            System.out.println(vencedor.getNome() + ", " + vencedor.getIdade() + ", " + vencedor.getPeso());
         } else {
             System.out.println("Atlantes e Egípcios venceram.");
-            System.out.println(perdedor.getNome() + ", " + perdedor.getIdade() + ", " + (int) perdedor.getPeso());
-            System.out.println(vencedor.getNome() + ", " + vencedor.getIdade() + ", " + (int) vencedor.getPeso());
+            System.out.println(perdedor.getNome() + ", " + perdedor.getIdade() + ", " + perdedor.getPeso());
+            System.out.println(vencedor.getNome() + ", " + vencedor.getIdade() + ", " + vencedor.getPeso());
         }
     }
 
-    public static void maiorIdade(ArrayList<Guerreiro> lado1, ArrayList<Guerreiro> lado2) {
-        int maior = lado1.get(0).getIdade(), i;
-        String nome = null;
-
-        for (i = 0; i < lado2.size(); i++) {
-            if (lado2.get(i).getIdade() > maior) {
-                maior = lado2.get(i).getIdade();
-                nome = lado2.get(i).getNome();
-            }
-        }
-        System.out.println(nome + " é o mais velho (" + maior + " unidades)");
-    }
-
-    public static int somarPeso(ArrayList<Guerreiro> guerreiro) {
-        int peso = 0, i;
-
-        for (i = 0; i < guerreiro.size(); i++) {
-            peso += guerreiro.get(i).getPeso();
-        }
-
-        return peso;
-    }
-
-    public static void pesoDosLados(ArrayList<Guerreiro> lado1, ArrayList<Guerreiro> lado2) {
-        double pesoLado1 = somarPeso(lado1), pesoLado2 = somarPeso(lado2);
-
-        System.out.println("Gregos e Nórdicos pesam - " + (int) pesoLado1 + " unidades");
-        System.out.println("Atlantes e Egípcios pesam - " + (int) pesoLado2 + " unidades");
-    }
-
-    public static void lerArquivo(ArrayList<Guerreiro> guerreiro, int identificador) throws FileNotFoundException {
+    public static void lerArquivo(List<Guerreiro> guerreiro, Integer identificador) throws FileNotFoundException {
         if (identificador == 1) {
             Scanner arquivo = new Scanner(new FileReader("lado1.txt"));
             while (arquivo.hasNextLine()) {
@@ -197,8 +163,8 @@ public class Trabalho {
         lerArquivo(lado1, 1);//Ler arquivo lado1.txt
         lerArquivo(lado2, 2);//Ler arquivo lado2.txt
 
-        pesoDosLados(lado1, lado2);//Cálcula soma dos pesos de cada lado e imprimir
-        maiorIdade(lado1, lado2);//Definir qual o guerreiro com a maior idade
+        FuncoesUtil.somarPeso(lado1, lado2);//Cálcula soma dos pesos de cada lado e imprimir
+        FuncoesUtil.maiorIdade(lado1, lado2);//Definir qual o guerreiro com a maior idade
         guerra(lado1, lado2);//Guerra entre os lados
     }
 

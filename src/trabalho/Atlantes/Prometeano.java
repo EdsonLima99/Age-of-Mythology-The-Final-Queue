@@ -4,8 +4,9 @@
  */
 package trabalho.Atlantes;
 
-import java.util.ArrayList;
 import trabalho.Guerreiro;
+
+import java.util.List;
 
 /**
  *
@@ -13,21 +14,38 @@ import trabalho.Guerreiro;
  */
 public class Prometeano extends Guerreiro {
 
-    public Prometeano(String nome, int idade, double peso) {
+    private Integer energiaInicial = 100;
+
+    public Prometeano(String nome, Integer idade, Double peso) {
         super(nome, idade, peso);
     }
 
-    public Prometeano(Guerreiro guerreiro, int energia) {
+    public Prometeano(Guerreiro guerreiro, Integer energia) {
         super(guerreiro.getNome(), guerreiro.getIdade(), guerreiro.getPeso());
         this.setEnergia(energia);
     }
 
     @Override
-    public void atacar(ArrayList<Guerreiro> atacando, ArrayList<Guerreiro> atacado, int i, int ordem) {
-        atacado.get(i).setEnergia(atacado.get(i).getEnergia() - 10);
+    public void atacar(List<Guerreiro> atacando, List<Guerreiro> atacado, Integer posicao, Integer ordem) {
+        atacado.get(posicao).setEnergia(atacado.get(posicao).getEnergia() - 10);
+    }
 
-        if (atacado.get(i).getEnergia() <= 0) {
-            morrer(atacando, atacado, i, 0);
+    @Override
+    public void morrer(List<Guerreiro> atacado, int posicao) {
+        if (getEnergia() <= 1) {
+            this.energiaInicial /= 2;
+            atacado.add(new Prometeano(atacado.get(posicao), (this.energiaInicial)));//adiciona no atacado um novo Prometeano
+            atacado.add(new Prometeano(atacado.get(posicao), (this.energiaInicial)));//adiciona no atacado um novo Prometeano
+            atacado.remove(posicao);
         }
     }
+
+
+        /*
+    Prometeano: são guerreiros de barro que se dividem em 2 quando morrem (cada um com
+    50% da energia original do prometeano e ambos colocados no final da fila do prometeano
+    original). Quando um prometeano chega a 1 ponto de energia, quando morre ele
+    efetivamente é eliminado. O ataque de um prometeano é de 10 unidades de energia. Peso e
+    idade passam do prometado morto para seus descendentes
+     */
 }

@@ -4,8 +4,10 @@
  */
 package trabalho.Atlantes;
 
-import java.util.ArrayList;
 import trabalho.Guerreiro;
+
+import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  *
@@ -13,20 +15,24 @@ import trabalho.Guerreiro;
  */
 public class Satiro extends Guerreiro {
 
-    public Satiro(String nome, int idade, double peso) {
+    public Satiro(String nome, Integer idade, Double peso) {
         super(nome, idade, peso);
     }
 
     @Override
-    public void atacar(ArrayList<Guerreiro> atacando, ArrayList<Guerreiro> atacado, int i, int ordem) {
-        int cont;
-
-        for (cont = 0; cont < atacado.size(); cont++) {
-            atacado.get(cont).setEnergia(atacado.get(cont).getEnergia() - 5);
-            if (atacado.get(cont).getEnergia() <= 0) {
-                morrer(atacando, atacado, cont, 0);
-                cont--;
+    public void atacar(List<Guerreiro> atacando, List<Guerreiro> atacado, Integer i, Integer ordem) {
+        AtomicInteger cont = new AtomicInteger();
+        atacado.forEach(guerreiro -> {
+            guerreiro.setEnergia(guerreiro.getEnergia() - 5);
+            if(guerreiro.getEnergia() <= 0){
+                morrer(atacado, cont.getAndIncrement());
+                cont.decrementAndGet();
             }
-        }
+        });
     }
+
+    /*
+    Sátiro: são guerreiros que utilizam lanças para atacar a distância. Quando atacam tiram
+    apenas 5 pontos de energia, entretanto acertam todos os guerreiros da fila adversária.
+     */
 }

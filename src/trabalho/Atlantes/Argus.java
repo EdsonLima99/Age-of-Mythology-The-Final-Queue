@@ -4,8 +4,9 @@
  */
 package trabalho.Atlantes;
 
-import java.util.ArrayList;
 import trabalho.Guerreiro;
+
+import java.util.List;
 
 /**
  *
@@ -13,17 +14,20 @@ import trabalho.Guerreiro;
  */
 public class Argus extends Guerreiro {
 
-    public Argus(String nome, int idade, double peso) {
+    public Argus(String nome, Integer idade, Double peso) {
         super(nome, idade, peso);
         this.setEnergia(60);
     }
 
     @Override
-    public void atacar(ArrayList<Guerreiro> atacando, ArrayList<Guerreiro> atacado, int i, int ordem) {
-        atacado.get(i).setEnergia(0);
-
-        if (atacado.get(i).getEnergia() <= 0) {
-            morrer(atacando, atacado, i, 0);
-        }
+    public void atacar(List<Guerreiro> atacando, List<Guerreiro> atacado, Integer posicao, Integer ordem) {
+        atacado.get(posicao).setEnergia(0);
     }
+
+
+        /*
+    Argus: guerreiro atlante monstruoso, ele ataca com uma bolha de ácido que mata o inimigo
+    imediatamente independente da energia do inimigo. Argus também é frágil e sua energia
+    começa em 60 pontos.
+     */
 }

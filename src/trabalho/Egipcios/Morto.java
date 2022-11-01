@@ -4,8 +4,9 @@
  */
 package trabalho.Egipcios;
 
-import java.util.ArrayList;
 import trabalho.Guerreiro;
+
+import java.util.List;
 
 /**
  *
@@ -13,16 +14,12 @@ import trabalho.Guerreiro;
  */
 public class Morto extends Mumia {
 
-    public Morto(String nome, int idade, double peso) {
+    public Morto(String nome, Integer idade, Double peso) {
         super(nome, idade, peso);
     }
 
     @Override
-    public void atacar(ArrayList<Guerreiro> atacando, ArrayList<Guerreiro> atacado, int i, int ordem) {
-        atacado.get(i).setEnergia(atacado.get(i).getEnergia() - 5);
-
-        if (atacado.get(i).getEnergia() <= 0) {
-            morrer(atacando, atacado, i, 0);
-        }
+    public void atacar(List<Guerreiro> atacando, List<Guerreiro> atacado, Integer posicao, Integer ordem) {
+        atacado.get(posicao).setEnergia(atacado.get(posicao).getEnergia() - 5);
     }
 }
