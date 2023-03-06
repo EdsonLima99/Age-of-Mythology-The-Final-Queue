@@ -10,7 +10,7 @@ import trabalho.Egipcios.Anubita;
 
 /**
  *
- * @author Edson Lima e Matheus Gonçalves
+ * @author Edson Lima
  */
 public abstract class Guerreiro {
 

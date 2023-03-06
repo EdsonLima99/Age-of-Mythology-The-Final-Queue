@@ -22,7 +22,7 @@ import trabalho.Nordicos.Valquiria;
 
 /**
  *
- * @author Edson Lima e Matheus Gonçalves
+ * @author Edson Lima
  */
 public class Trabalho {
 

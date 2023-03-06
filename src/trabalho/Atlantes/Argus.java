@@ -9,7 +9,7 @@ import trabalho.Guerreiro;
 
 /**
  *
- * @author Edson Lima e Matheus Gonçalves
+ * @author Edson Lima
  */
 public class Argus extends Guerreiro {
 
